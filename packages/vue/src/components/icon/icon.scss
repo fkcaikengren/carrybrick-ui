@@ -1,0 +1,27 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+@use "../../styles/animation.scss" as *;
+
+@include b(icon) {
+  --icon-color: inherit;
+  // height: 1em;
+  // width: 1em;
+  // line-height: 1em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor; /* 常规css中是没有fill属性的，只在XML-CSS中存在，用于设置当前元素的填充内容，例如颜色，图片 */ 
+  color: var(--icon-color);
+  font-size: inherit;
+
+  @include when(loading) {
+    animation: rotating 0.5 linear infinite;
+  }
+
+  svg { // svg 没有width和height, 通过css控制，1em取决于父元素的fontSize大小
+    height: 1em;
+    width: 1em;
+  }
+}

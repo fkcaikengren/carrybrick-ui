@@ -1,0 +1,54 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+
+
+@include b(collapse) {
+
+  // 定义css变量：背景色、边框色、字体大小和颜色、item高度
+  @include set-component-css-var(collapse, $collapse); 
+  width: 100%;
+  border-bottom: 1px solid getCssVar('collapse', 'border-color');
+}
+
+
+@include b(collapse-item) {
+  overflow: hidden;
+  border-top: 1px solid getCssVar('collapse', 'border-color');
+
+  @include e(header){
+    height: getCssVar('collapse', 'header-height');
+    background-color: getCssVar('collapse', 'header-bg-color');
+    font-size: getCssVar('collapse', 'header-font-size');
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    @include e(arrow){
+      margin: 0 8px 0 auto;
+      transition: transform 0.3s linear;
+      @include when(active) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  
+
+  @include e(wrap){
+    background-color: getCssVar('collapse', 'content-bg-color');
+    font-size: getCssVar('collapse', 'content-font-size');
+    color: getCssVar('collapse', 'content-text-color');
+    @include e(content){
+      padding-bottom: 10px;
+    }
+  }
+  
+}
+
+
+
+/* 过渡动画 */
+.#{$namespace}-collapse-item-enter-active, .#{$namespace}-collapse-item-leave-active {
+  transition: height 0.3s linear;
+}
