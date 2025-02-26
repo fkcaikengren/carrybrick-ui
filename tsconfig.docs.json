@@ -7,7 +7,13 @@
     "types": ["unplugin-vue-define-options"], // 用来指定需要包含的模块，并将其包含在全局范围内
     "skipLibCheck": true // 是否跳过声明文件的类型检查，这可以在编译期间以牺牲类型系统准确性为代价来节省时间，默认：false
   },
-  "include": ["docs",],
+  
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "packages/vue/**/*.ts",
+    "packages/vue/**/*.ts"
+  ],
   "exclude": [ 
     "node_modules",
   ]

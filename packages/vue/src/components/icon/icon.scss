@@ -1,7 +1,7 @@
 @use "../../styles/var.scss" as *;
 @use "../../styles/mixins/var" as *;
 @use "../../styles/mixins/mixins" as *;
-@use "../../styles/animation.scss" as *;
+@use "../../styles/animation" as *;
 
 @include b(icon) {
   --icon-color: inherit;
@@ -17,7 +17,7 @@
   font-size: inherit;
 
   @include when(loading) {
-    animation: rotating 0.5 linear infinite;
+    animation: rotating 2s linear infinite;
   }
 
   svg { // svg 没有width和height, 通过css控制，1em取决于父元素的fontSize大小

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { CBIcon } from '@carrybrick-ui/vue'
-  import { ArrowRight, CirclePlus, Check, InfoFilled } from '@element-plus/icons-vue'
+  import CBIcon from '../../../packages/vue/src/components/icon/Icon.vue'
+  import { ArrowRight, CirclePlus, Check, InfoFilled, Loading } from '@element-plus/icons-vue'
 </script>
 
 <template>
@@ -26,6 +26,11 @@
           <InfoFilled />
         </CBIcon>
       </div>
+      <div class="col">
+        <CBIcon >
+          <Loading />
+        </CBIcon>
+      </div>
     </div>
 
     <div class="row">
@@ -47,6 +52,11 @@
       <div class="col">
         <CBIcon size="20px" color="#2f8">
           <InfoFilled />
+        </CBIcon>
+      </div>
+      <div class="col">
+        <CBIcon class="is-loading">
+          <Loading />
         </CBIcon>
       </div>
     </div>

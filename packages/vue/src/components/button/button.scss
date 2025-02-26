@@ -1,0 +1,150 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+@use "../../styles//animation.scss" as *;
+@use "sass:map";
+
+
+@include b(button) {
+  @include set-component-css-var(button, $button);
+  // 首先考虑基础的样式：字体，颜色，背景色，边框，padding等
+  font-size: getCssVar('font-size-base');
+  color: getCssVar('color-black');
+  background-color: getCssVar('color-white');
+  border: getCssVar('border');
+  border-radius: getCssVar('border-radius-base');
+  // 考虑更多
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  transition: getCssVar('transition-all');
+  height: getCssVar('component-size');  //保证默认高度
+  padding: map.get($button-padding-vertical, 'default') map.get($button-padding-horizontal, 'default'); //padding可以撑开按钮的高度（考虑字体很大）
+      
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include when(round) {
+    border-radius: calc(getCssVar('component-size')/2);
+  }
+
+  &:hover,&:active {
+    color: getCssVar('color-primary');
+    background-color: getCssVar('color-primary-light-9');
+    border-color: getCssVar('color-primary');
+  }
+
+  @include when(plain) {
+    &:hover,&:active {
+      color: getCssVar('color-primary');
+      background-color: getCssVar('color-white');
+      border-color: getCssVar('color-primary');
+    }
+  }
+  
+  @include when(text) {
+    background-color: transparent;
+    border-color: transparent;
+    &:hover,&:active {
+      color: getCssVar('color-black');
+      background-color: getCssVar('fill-color-light');
+      border-color: transparent;
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    &:hover,&:active {
+      color: getCssVar('color-black');
+      background-color: getCssVar('color-white');
+      border: getCssVar('border');
+    }
+  }
+
+
+  // 控制type
+  @each $type in (primary, success, warning, danger, error, info) {
+    @include m($type) {
+      color: getCssVar('color-white');
+      background-color: getCssVar('color-#{$type}');
+      border-color: getCssVar('color-#{$type}');
+
+      &:hover,&:active {
+        color: getCssVar('color-white');
+        background-color: getCssVar('color-#{$type}-light-2');
+        border-color: getCssVar('color-#{$type}-light-2');
+      }
+
+      @include when(disabled) {
+        color: getCssVar('color-white');
+        background-color: getCssVar('color-#{$type}-light-3');
+        border-color: getCssVar('color-#{$type}-light-3');
+        &:hover,&:active {
+          color: getCssVar('color-white');
+          background-color: getCssVar('color-#{$type}-light-3');
+          border-color: getCssVar('color-#{$type}-light-3');
+        }
+      }
+
+
+      @include when(plain) {
+        color: getCssVar('color-#{$type}');
+        background-color: getCssVar('color-#{$type}-light-9');
+
+        &:hover,&:active {
+          color: getCssVar('color-white');
+          background-color: getCssVar('color-#{$type}');
+          border-color: getCssVar('color-#{$type}');
+        }
+
+        @include when(disabled) {
+          color: getCssVar('color-#{$type}');
+          background-color: getCssVar('color-#{$type}-light-7');
+          border-color: getCssVar('color-#{$type}-light-3');
+          &:hover,&:active {
+            color: getCssVar('color-#{$type}');
+            background-color: getCssVar('color-#{$type}-light-7');
+            border-color: getCssVar('color-#{$type}-light-3');
+          }
+        }
+      }
+
+      @include when(text) {
+        color: getCssVar('color-#{$type}');
+        background-color: transparent;
+        border-color: transparent;
+
+        &:hover,&:active {
+          color: getCssVar('color-#{$type}');
+          background-color: getCssVar('fill-color-light');
+          border-color: transparent;
+        }
+
+        @include when(disabled) {
+          color: getCssVar('color-#{$type}-light-3');
+          &:hover,&:active {
+            color: getCssVar('color-#{$type}-light-3');
+            background-color: transparent;
+            border-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  // 控制size
+  @each $size in (large, small) {
+    @include m($size) {
+      @include set-css-var-value('button-size', getCssVar('component-size',$size));
+
+      height: getCssVar('button-size');
+      padding: map.get($button-padding-vertical, $size) map.get($button-padding-horizontal, $size); 
+      @include when(round) {
+        border-radius: calc(getCssVar('button-size')/2);
+      }
+    }
+  }
+ 
+}
