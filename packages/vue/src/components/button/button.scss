@@ -147,4 +147,8 @@
     }
   }
  
+  @include e(icon){
+    padding-left: 6px;
+    padding-right: 6px;
+  }
 }

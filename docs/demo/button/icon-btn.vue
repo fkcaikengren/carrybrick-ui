@@ -12,37 +12,37 @@
       <div class="row">
         <div class="mr-10" >
           <CBButton icon="Plus">
-            default 
+            增加 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" icon="Minus">
-            primary 
+            减少 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" plain icon="CirclePlus">
-            success 
+            更多 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" size="large" icon="Search">
-            warning 
+            搜索 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" size="default" icon="Delete">
-            danger 
+            删除 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" size="small" icon="Refresh">
-            info 
+            更新 
           </CBButton>
         </div>
       </div>
@@ -52,37 +52,34 @@
       <div class="row">
         <div class="mr-10" >
           <CBButton loading>
-            default 
+            loading 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" loading>
-            primary 
+            loading 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" plain loading>
-            success 
+            loading 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton  round loading>
-            warning 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" round loading>
-            danger 
           </CBButton>
         </div>
 
         <div class="mr-10">
           <CBButton type="primary" plain round loading >
-            info 
           </CBButton>
         </div>
       </div>

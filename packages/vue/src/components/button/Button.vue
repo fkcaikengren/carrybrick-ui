@@ -1,14 +1,14 @@
 <template>
   <button :class="rootKls" v-bind="_props" >
     <template v-if="loading">
-      <CBIcon  :class="loadingKls">
+      <CBIcon  :class="[loadingKls, iconKls]">
         <Loading />
       </CBIcon>
     </template>
-    <CBIcon v-else-if="icon"> 
+    <CBIcon :class="iconKls" v-else-if="icon"> 
       <component :is="icon" />
     </CBIcon>
-    <span v-else>
+    <span >
       <slot></slot>
     </span>
   </button>
@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<ButtonProps>(),{
 })
 
 
-const { b, m, is } = useNamespace('button')
+const { b, e, m, is } = useNamespace('button')
 
 const rootKls = computed(()=>[
   b(), 
@@ -48,6 +48,8 @@ const rootKls = computed(()=>[
 ])
 
 const loadingKls = computed(()=> is('loading', props.loading))
+
+const iconKls = e('icon')
 
 const _props = computed(()=>{
   if(props.disabled){
