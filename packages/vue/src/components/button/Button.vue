@@ -8,7 +8,7 @@
     <CBIcon :class="iconKls" v-else-if="icon"> 
       <component :is="icon" />
     </CBIcon>
-    <span >
+    <span :class="textKls">
       <slot></slot>
     </span>
   </button>
@@ -50,6 +50,7 @@ const rootKls = computed(()=>[
 const loadingKls = computed(()=> is('loading', props.loading))
 
 const iconKls = e('icon')
+const textKls = e('text')
 
 const _props = computed(()=>{
   if(props.disabled){

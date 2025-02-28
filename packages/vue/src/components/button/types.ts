@@ -1,10 +1,10 @@
+import { ComponentSize } from "../../types";
 
-export type BtnSize = 'large' | 'default' | 'small';
 export type BtnType = 'primary' | 'success' | 'warning' | 'danger' | 'info';
 
 
 export interface ButtonProps {
-  size?: BtnSize,
+  size?: ComponentSize,
   type?: BtnType,
   plain?: boolean,
   text?: boolean,

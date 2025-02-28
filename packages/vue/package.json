@@ -15,7 +15,8 @@
     "vitest": "^3.0.7"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1"
+    "@element-plus/icons-vue": "^2.3.1",
+    "@vueuse/core": "^12.7.0"
   },
   "peerDependencies": {
     "vue": "^3.4.0"

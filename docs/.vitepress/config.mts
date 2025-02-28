@@ -31,6 +31,13 @@ export default defineConfig({
           { text: 'collapse', link: '/vue/collapse' }
           
         ]
+      },
+      {
+        text: '表单组件',
+        items: [
+          { text: 'input', link: '/vue/input' }
+          
+        ]
       }
       
     ],

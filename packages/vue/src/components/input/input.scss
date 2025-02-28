@@ -1,0 +1,110 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+@use "../../styles//animation.scss" as *;
+@use "sass:map";
+
+@include b(input){
+  @include set-component-css-var(input, $input)
+}
+
+
+@include b(input){ 
+  box-sizing: border-box;
+  font-size: getCssVar(font-size-base);
+  color: getCssVar('text-color');
+  background-color: getCssVar('bg-color');
+  height: getCssVar('component-size');
+  display: inline-flex;
+  flex-direction: row;
+  width: getCssVar('input-width');
+
+  @each $size in (large, small) {
+    @include m($size) {
+      @include set-css-var-value('input-size', getCssVar('component-size',$size));
+      height: getCssVar('input-size');
+  
+    }
+  }
+  
+
+  @include e(wrap){
+    box-sizing: border-box;
+    border: getCssVar('input-border');
+    border-radius: getCssVar('input-border-radius');
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 12px;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &:hover {
+      border-color: getCssVar('input-hover-border');
+    }
+    @include when(focused) {
+      border-color: getCssVar('input-focus-border');
+    }
+    
+
+    @include e(prefix){
+      height: getCssVar('component-size');
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      @include e(prefix-icon){
+        padding-right: 8px;
+      }
+    }
+
+    @include e(suffix){
+      height: getCssVar('component-size');
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      @include e(suffix-icon){
+        padding-left: 8px;
+      }
+      @include e(clear-icon){
+        cursor: pointer;
+      }
+    }
+
+    @include e(inner){
+      flex-grow: 1;
+      min-width: 50px;
+      outline: none;
+      &::placeholder {
+        color: getCssVar('input-placeholder-color');
+      }
+      &:hover {
+        border-color: getCssVar('input-hover-border');
+      }
+      &:focus { 
+        outline: none;
+      }
+    }
+  }
+
+
+  @include when(disabled) {
+    cursor: not-allowed;
+
+    @include e(wrap) {
+      cursor: not-allowed;
+      pointer-events: none;
+      color: map.get($disabled, 'text-color');
+      background-color: map.get($disabled, 'bg-color');
+      border-color: map.get($disabled, 'border-color');
+    }
+    @include e(inner) {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+}
