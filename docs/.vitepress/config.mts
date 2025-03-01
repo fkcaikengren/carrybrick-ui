@@ -28,15 +28,15 @@ export default defineConfig({
       {
         text: '展示组件',
         items: [
-          { text: 'collapse', link: '/vue/collapse' }
-          
+          { text: 'Collapse', link: '/vue/collapse' }
         ]
       },
       {
         text: '表单组件',
         items: [
-          { text: 'input', link: '/vue/input' }
-          
+          { text: 'Input', link: '/vue/input' },
+          { text: 'Textarea', link: '/vue/textarea' },
+          { text: 'Switch', link: '/vue/switch' }
         ]
       }
       

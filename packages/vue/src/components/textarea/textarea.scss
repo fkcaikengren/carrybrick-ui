@@ -1,0 +1,73 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+@use "../../styles//animation.scss" as *;
+@use "sass:map";
+
+
+@include b(textarea){ 
+  @include set-component-css-var('textarea', $textarea);
+  box-sizing: border-box;
+  font-size: getCssVar(font-size-base);
+  color: getCssVar('textarea-text-color');
+  background-color: getCssVar('textarea-bg-color');
+  display: inline-flex;
+  flex-direction: row;
+  width: getCssVar('textarea-width');
+
+
+  @include e(wrap){
+    box-sizing: border-box;
+    border: getCssVar('textarea-border');
+    border-radius: getCssVar('textarea-border-radius');
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &:hover {
+      border-color: getCssVar('textarea-hover-border');
+    }
+    @include when(focused) {
+      border-color: getCssVar('textarea-focus-border');
+    }
+    
+
+    @include e(inner){
+      flex-grow: 1;
+      min-width: 50px;
+      padding: 5px 11px;
+      background-color: transparent;
+      outline: none;
+      &::placeholder {
+        color: getCssVar('textarea-placeholder-color');
+      }
+      &:hover {
+        border-color: getCssVar('textarea-hover-border');
+      }
+      &:focus { 
+        outline: none;
+      }
+    }
+  }
+
+
+  @include when(disabled) {
+    cursor: not-allowed;
+
+    @include e(wrap) {
+      cursor: not-allowed;
+      pointer-events: none;
+      color: map.get($disabled, 'text-color');
+      background-color: map.get($disabled, 'bg-color');
+      border-color: map.get($disabled, 'border-color');
+    }
+    @include e(inner) {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+}

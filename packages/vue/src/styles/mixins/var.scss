@@ -643,6 +643,28 @@ $input-padding-horizontal: map.merge(
   $input-padding-horizontal
 );
 
+
+$textarea: () !default;
+$textarea: map.merge(
+  (
+    'text-color': getCssVar('text-color-regular'),
+    'border': getCssVar('border'),
+    'hover-border': getCssVar('border-color-hover'),
+    'focus-border': getCssVar('color-primary'),
+    'transparent-border': 0 0 0 1px transparent inset,
+    'border-color': getCssVar('border-color'),
+    'border-radius': getCssVar('border-radius-base'),
+    'bg-color': getCssVar('fill-color', 'blank'),
+    'icon-color': getCssVar('text-color-placeholder'),
+    'placeholder-color': getCssVar('text-color-placeholder'),
+    'hover-border-color': getCssVar('border-color-hover'),
+    'clear-hover-color': getCssVar('text-color-secondary'),
+    'focus-border-color': getCssVar('color-primary'),
+    'width': 100%,
+  ),
+  $textarea
+);
+
 // Cascader
 // css3 var in packages/theme-chalk/src/cascader.scss
 $cascader: () !default;

@@ -12,8 +12,8 @@
 @include b(input){ 
   box-sizing: border-box;
   font-size: getCssVar(font-size-base);
-  color: getCssVar('text-color');
-  background-color: getCssVar('bg-color');
+  color: getCssVar('input-text-color');
+  background-color: getCssVar('input-bg-color');
   height: getCssVar('component-size');
   display: inline-flex;
   flex-direction: row;
@@ -97,7 +97,7 @@
     @include e(wrap) {
       cursor: not-allowed;
       pointer-events: none;
-      color: map.get($disabled, 'text-color');
+      color: map.get($disabled, 'input-text-color');
       background-color: map.get($disabled, 'bg-color');
       border-color: map.get($disabled, 'border-color');
     }

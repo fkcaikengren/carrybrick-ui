@@ -1,8 +1,7 @@
-import { computed, ref, watch, shallowRef  } from 'vue';
+import { computed, ref, watch  } from 'vue';
 import { useNamespace } from '@carrybrick-ui/vue-hooks';
 import { View as ViewIcon, Hide as HideIcon} from '@element-plus/icons-vue'
 import type { Ref } from 'vue';
-import { useEventListener } from '@vueuse/core'
 import { InputProps , InputType} from './types';
 
 
@@ -59,30 +58,3 @@ export const useKls = (props: InputProps, inputType: Ref<InputType | undefined>,
 
 }
 
-
-export const useFocus = ()=>{
-
-  const wrapRef = shallowRef<HTMLElement>()
-  const inputRef = shallowRef<HTMLElement>()
-  const focus = () => inputRef.value?.focus() 
-  const blur = () => inputRef.value?.blur()
-
-  const isFocused = ref(false) //wrapRef和inputRef任意一个聚焦
-
-  useEventListener(inputRef, 'focus', (evt: Event)=> {
-    isFocused.value = true;
-  }, true)
-  useEventListener(inputRef, 'blur', (evt: Event)=> {
-    isFocused.value = false;
-  }, true)
-  useEventListener(wrapRef, 'click', (evt: Event)=>{
-    inputRef.value?.focus()
-  }, true)
-  return {
-    wrapRef,
-    inputRef,
-    focus,
-    blur,
-    isFocused
-  }
-}

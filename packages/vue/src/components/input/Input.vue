@@ -39,7 +39,8 @@ import { ref} from 'vue'
 import CBIcon from '../icon/Icon.vue'
 import { CircleClose } from '@element-plus/icons-vue'
 import type {  InputProps, InputEmits } from './types'
-import { useKls, usePassword, useFocus } from './use-input';
+import { useKls, usePassword } from './use-input';
+import { useInputFocus } from '@carrybrick-ui/vue-hooks'
 
 
 defineOptions({
@@ -72,7 +73,7 @@ const {
   focus,
   blur,
   isFocused
-} = useFocus()
+} = useInputFocus()
 
 const {
   rootKls,
