@@ -2,17 +2,17 @@
   import { ref } from 'vue';
   import CBSwitch from '../../../packages/vue/src/components/switch/Switch.vue'
 
-  const switchState = ref(false)
-  const ok = ref(false)
+  const state1 = ref(true)
+  const state2 = ref(false)
 
 </script>
 
 <template>
   <main>
-    <CBSwitch v-model="switchState" />
-    <CBSwitch v-model="ok" 
-    class="ml-2"
-    style="--cb-switch-on-color: #13ce66; --cb-switch-off-color: #ff4949"/>
+    <CBSwitch v-model="state1" disabled />
+    <CBSwitch v-model="state2" 
+      class="ml-2"
+    />
   </main>
 </template>
 

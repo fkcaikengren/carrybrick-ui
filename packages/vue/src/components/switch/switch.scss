@@ -1,0 +1,198 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+@use "../../styles//animation.scss" as *;
+@use "sass:map";
+
+
+// 设置scss变量
+
+$switch-height: () !default;
+$switch-height: map.merge(
+  (
+    'large': 40px,
+    'default': 32px,
+    'small': 24px,
+  ),
+  $switch-height
+);
+
+$switch-font-size: () !default;
+$switch-font-size: map.merge(
+  (
+    'large': 14px,
+    'default': 14px,
+    'small': 12px,
+  ),
+  $switch-font-size
+);
+
+$switch-core-border-radius: () !default;
+$switch-core-border-radius: map.merge(
+  (
+    'large': 12px,
+    'default': 10px,
+    'small': 8px,
+  ),
+  $switch-core-border-radius
+);
+
+$switch-core-width: () !default;
+$switch-core-width: map.merge(
+  (
+    'large': 50px,
+    'default': 40px,
+    'small': 30px,
+  ),
+  $switch-core-width
+);
+
+$switch-core-height: () !default;
+$switch-core-height: map.merge(
+  (
+    'large': 24px,
+    'default': 20px,
+    'small': 16px,
+  ),
+  $switch-core-height
+);
+
+$switch-button-size: () !default;
+$switch-button-size: map.merge(
+  (
+    'large': 20px,
+    'default': 16px,
+    'small': 12px,
+  ),
+  $switch-button-size
+);
+
+$switch-content-padding: () !default;
+$switch-content-padding: map.merge(
+  (
+    'large': 6px,
+    'default': 4px,
+    'small': 2px,
+  ),
+  $switch-content-padding
+);
+
+
+@include b(switch) {
+  @include set-component-css-var('switch', $switch); // on-color, off-color
+}
+
+@include b(switch){ 
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: map.get($switch-core-height, 'default');
+  font-size: map.get($switch-font-size, 'default');
+  line-height: map.get($switch-core-height, 'default');
+  background-color: transparent;
+  vertical-align: middle;
+
+  @include e(input) {
+    position: absolute;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    z-index: -100;
+    visibility: hidden;
+  }
+
+  @include e(core){
+    display: inline-flex;
+    align-items: center;
+
+    min-width: map.get($switch-core-width, 'default');
+    height: map.get($switch-core-height, 'default');
+    background-color: getCssVar('switch-off-color');
+    border-radius: map.get($switch-core-border-radius, 'default');
+    transition: background-color 0.2s linear;
+    
+
+    @include e(inner) {
+      width: 100%;
+      text-align: center;
+      padding: 0 4px 0 calc(map.get($switch-button-size, 'default') + 2px);
+    }
+
+    @include e(action) {
+      width: map.get($switch-button-size, 'default');
+      height: map.get($switch-button-size, 'default');
+      background-color: getCssVar('switch-button-color');
+      border-radius: 50%;
+      position: absolute;
+      left: 1px;
+      transition: left 0.2s linear;
+    }
+  }
+
+  // checked
+  @include when(checked) {
+    @include e(core){
+      background-color: getCssVar('switch-on-color');
+
+      @include e(inner) {
+        padding: 0 calc(map.get($switch-button-size, 'default') + 2px) 0 4px;
+      }
+      @include e(action) {
+        left: calc(100% - 1px - map.get($switch-button-size, 'default'));
+      }
+    }
+  }
+
+  // disabled
+  @include when(disabled) {
+    opacity: 0.6;
+    @include e(core) {
+      cursor: not-allowed;
+      @include e(inner) {
+        cursor: not-allowed;
+      }
+      @include e(action) {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // 不同size, 有不同的球大小、文本大小，高度和 core官渡
+  @each $size in (large, small){
+    @include m($size) {
+      height: map.get($switch-core-height, $size);
+      @include e(core){
+        min-width: map.get($switch-core-width, $size);
+        height: map.get($switch-core-height, $size);
+        font-size: map.get($switch-font-size, $size);
+        line-height: map.get($switch-core-height, $size);
+        border-radius: map.get($switch-core-border-radius, $size);
+    
+        // @include e(inner) {
+        // }
+    
+        @include e(action) {
+          width: map.get($switch-button-size, $size);
+          height: map.get($switch-button-size, $size);
+          background-color: getCssVar('switch-button-color');
+        }
+      }
+
+      @include when(checked) {
+        @include e(core){
+          @include e(inner) {
+            padding: 0 calc(map.get($switch-button-size, $size) + 2px) 0 4px;
+          }
+          @include e(action) {
+            left: calc(100% - 1px - map.get($switch-button-size, $size));
+          }
+        }
+      }
+    }
+
+    
+  }
+  
+
+}
