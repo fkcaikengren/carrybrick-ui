@@ -10,11 +10,6 @@
   const text3 = ref('')
   const text4 = ref('')
 
-
-  const text5 = ref('')
-  const text6 = ref('')
-
-
   const handlePlusClick = ()=>{
     alert('点击icon')
   }
@@ -25,7 +20,7 @@
 
 <template>
   <main>
-    <h3>前缀图标，后缀图标</h3>
+    <h5>前缀图标，后缀图标</h5>
     <div class="row">
       <div class="col">
         <CBInput placeholder="搜索1" v-model="text1" prefix-icon='Search' />
@@ -35,27 +30,18 @@
       </div>
     </div>
 
-    <h3>可清空</h3>
-    <div class="row">
-      <div class="col">
-        <CBInput placeholder="搜索3" v-model="text3" prefix-icon='Search' clearable />
-      </div>
-      <div class="col">
-        <CBInput placeholder="搜索4" v-model="text4" suffix-icon='Search' clearable />
-      </div>
-    </div>
 
-    <h3>前缀插槽、后缀插槽</h3>
+    <h5>前缀插槽、后缀插槽</h5>
     <div class="row">
       <div class="col">
-        <CBInput placeholder="请输入" v-model="text5" >
+        <CBInput placeholder="请输入" v-model="text3" >
           <template v-slot:prefix>
             <span class="prefix-icon">🚀</span>
           </template>
         </CBInput>
       </div>
       <div class="col">
-        <CBInput placeholder="请输入" v-model="text6"  >
+        <CBInput placeholder="请输入" v-model="text4"  >
           <template v-slot:suffix>
             <CBIcon class="suffix-icon" @click="handlePlusClick">
               <CirclePlus /> 

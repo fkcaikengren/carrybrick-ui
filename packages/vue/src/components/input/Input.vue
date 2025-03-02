@@ -13,6 +13,7 @@
         :type="inputType" 
         :placeholder="placeholder" 
         :class="innerKls"
+        :readonly="readonly"
         :value="inputValue"
         @input="handleChange"
       />
@@ -54,6 +55,7 @@ const props = withDefaults(defineProps<InputProps>(),{
   modelValue: '',
   clearable: false,
   disabled: false,
+  readonly: false,
   size: 'default',
   tabindex: 0
 })

@@ -10,7 +10,8 @@ export interface InputProps {
   modelValue?: string
   clearable?: boolean
   disabled?: boolean
-  size? : ComponentSize,
+  readonly?: boolean
+  size? : ComponentSize
   inputStyle?: CSSProperties | undefined
   prefixIcon?: string
   suffixIcon?: string

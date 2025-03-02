@@ -2,19 +2,9 @@
   import { ref, watch } from 'vue';
 import CBInput from '../../../packages/vue/src/components/input/Input.vue'
 
-  const uesrname = ref('')
-  const password = ref('')
-  const search = ref('')
-
-  watch(()=>uesrname.value, ()=>{
-    console.log('username', uesrname.value);
-  })
-  watch(()=>password.value, ()=>{
-    console.log('username', password.value);
-  })
-  watch(()=>search.value, ()=>{
-    console.log('username', search.value);
-  })
+  const text1 = ref('')
+  const text2 = ref('')
+  const text3 = ref('')
 
 </script>
 
@@ -23,18 +13,18 @@ import CBInput from '../../../packages/vue/src/components/input/Input.vue'
     <h3>尺寸</h3>
     <div class="row">
       <div class="col">
-        <CBInput placeholder="请输入" v-model="uesrname"
+        <CBInput placeholder="请输入" v-model="text1"
           size="small"
           :style="{width: '140px'}"
         />
       </div>
       <div class="col">
-        <CBInput placeholder="请输入" v-model="uesrname"
+        <CBInput placeholder="请输入" v-model="text2"
           :style="{width: '140px'}"
         />
       </div>
       <div class="col">
-        <CBInput placeholder="请输入" v-model="uesrname"
+        <CBInput placeholder="请输入" v-model="text3"
           size="large"
           :style="{width: '140px'}"
         />

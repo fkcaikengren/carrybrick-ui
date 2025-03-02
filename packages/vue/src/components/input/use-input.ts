@@ -26,7 +26,6 @@ export const usePassword = (props : InputProps)=>{
 
 
 
-
 export const useKls = (props: InputProps, inputType: Ref<InputType | undefined>, isFocused: Ref<boolean>)=>{
   const { b, e, m, is } = useNamespace('input')
 
