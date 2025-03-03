@@ -1,0 +1,80 @@
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+@use "../../styles//animation.scss" as *;
+@use "sass:map";
+
+@include b(popover){
+  // display: none;
+  position: relative;
+
+  background-color: map.get($popover, 'bg-color');
+  font-size: map.get($popover, 'font-size');
+  border: 1px solid map.get($popover, 'border-color');
+  padding: map.get($popover, 'padding');
+  border-radius: map.get($popover, 'border-radius');
+  box-shadow: getCssVar('box-shadow');
+
+  @include e(arrow) {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    z-index: -1;
+
+    &::before {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      z-index: -1;
+      content: ' ';
+      transform: rotate(45deg);
+      background-color: map.get($popover, 'bg-color');
+      border: 1px solid map.get($popover, 'border-color');
+      box-sizing: border-box;
+    }
+  }
+
+  $arrow-selector: #{& + '__arrow'};
+
+  $placements: (
+    'top': 'bottom',
+    'bottom': 'top',
+    'left': 'right',
+    'right': 'left',
+  );
+
+  @each $placement, $opposite in $placements {
+    &[data-popper-placement^='#{$placement}'] > #{$arrow-selector} {
+      #{$opposite}: -5px;
+
+      &::before {
+        @if $placement == top {
+          border-bottom-right-radius: 2px;
+        }
+        @if $placement == bottom {
+          border-top-left-radius: 2px;
+        }
+        @if $placement == left {
+          border-top-right-radius: 2px;
+        }
+        @if $placement == right {
+          border-bottom-left-radius: 2px;
+        }
+      }
+    }
+  }
+
+  @each $placement,
+    $adjacency
+      in ('top': 'left', 'bottom': 'right', 'left': 'bottom', 'right': 'top')
+  {
+    &[data-popper-placement^='#{$placement}'] > {
+      #{$arrow-selector}::before {
+        border-#{$placement}-color: transparent !important;
+        border-#{$adjacency}-color: transparent !important;
+      }
+    }
+  }
+  
+
+}

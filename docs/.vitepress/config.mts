@@ -28,7 +28,8 @@ export default defineConfig({
       {
         text: '展示组件',
         items: [
-          { text: 'Collapse', link: '/vue/collapse' }
+          { text: 'Collapse', link: '/vue/collapse' },
+          { text: 'Popover', link: '/vue/popover' }
         ]
       },
       {
