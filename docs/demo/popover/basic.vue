@@ -1,7 +1,5 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import CBPopover from '../../../packages/vue/src/components/popover/Popover.vue'
-  import CBButton from '../../../packages/vue/src/components/button/Button.vue'
+    import {CBPopover, CBButton} from '@carrybrick/vue'
 </script>
 
 <template>

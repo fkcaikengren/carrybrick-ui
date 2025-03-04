@@ -41,7 +41,9 @@ const {activeNames, handleClick} = inject<CollapseContext>(CollapseContextKey, {
 
 
 
-const isExpanded = computed(()=> activeNames.value.includes(props.name))
+const isExpanded = computed(()=> {
+  return Array.isArray(activeNames.value) ? activeNames.value.includes(props.name) : activeNames.value === props.name
+})
 
 const {
   klsNamespace, rootKls, headKls, contentWrapKls, contentKls, arrowKls

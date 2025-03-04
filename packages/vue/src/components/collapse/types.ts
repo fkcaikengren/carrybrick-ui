@@ -1,11 +1,8 @@
 
 export type ItemName = string | number
 export interface CollapseProps {
-  modelValue: Array<ItemName>
-}
-
-export interface CollapseEmits {
-  (event: 'update:modelValue', value: Array<ItemName> ): void
+  modelValue: Array<ItemName> | ItemName
+  accordion?: boolean
 }
 export interface CollapseItemProps {
   name: ItemName //唯一标识

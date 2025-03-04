@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
-  import CBInput from '../../../packages/vue/src/components/input/Input.vue'
-
+  import {CBInput} from '@carrybrick/vue'
   const text1 = ref('')
   const text2 = ref('')
 

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-  import CBButton from '../../../packages/vue/src/components/button/Button.vue'
-  import { Refresh } from '@element-plus/icons-vue'
-  // 注册局部组件
+  import {CBButton} from '@carrybrick/vue'
   
 </script>
 

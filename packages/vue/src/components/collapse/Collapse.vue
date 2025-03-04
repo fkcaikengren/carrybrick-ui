@@ -1,11 +1,3 @@
-/*
-  设计:
-  数据交给调用者管理
-  Collapse: 只管状态（记录展开的状态，触发change），不管UI
-  CollapseItem: 接受来自Collapse的数据，渲染UI
-*/
-
-
 <template>
   <div :class="rootKls">
     <slot></slot>
@@ -16,40 +8,53 @@ import './collapse.scss'
 import {ref, watch, provide } from 'vue'
 import type { CollapseContext } from './constant';
 import { CollapseContextKey } from './constant';
-import type { CollapseEmits, CollapseProps, ItemName } from './types';
+import type { CollapseProps, ItemName } from './types';
 import { useKls } from './use-collapse';
 
 
 defineOptions({
   name: 'CBCollapse',
 })
-const props = defineProps<CollapseProps>()
-const activeNames = ref<Array<ItemName>>(props.modelValue)
-const emits = defineEmits<CollapseEmits>() //定义emit事件
+const props = withDefaults(defineProps<CollapseProps>(), {
+  accordion: false
+})
 
+if(props.accordion && Array.isArray(props.modelValue)){
+  // 警告
+  console.warn('in accordion mode, modelValue should be string or number')
+}
+
+const activeNames = ref(props.modelValue)
+const emits = defineEmits(['update:modelValue']) //定义emit事件
 
 const {rootKls} = useKls()
-
-
 
 // 监听props.modelValue的变化
 watch(()=> props.modelValue, (newValue)=>{
   activeNames.value = newValue;
-  // console.log(activeNames);
 }, {deep: true})
 
 // CollapseItem的点击函数
-const handleClick = (name: string | number ) =>{
-  // console.log(name);
-  // 如果有则删除，没有则添加
-  const idx = activeNames.value.indexOf(name)
-  // console.log(idx);
-  if(idx>-1){
-    activeNames.value.splice(idx, 1)
+const handleClick = (name: ItemName ) =>{
+  if(Array.isArray(activeNames.value)){
+    // 如果有则删除，没有则添加
+    const idx = activeNames.value.indexOf(name)
+    if(idx>-1) {
+      activeNames.value.splice(idx, 1)
+    }else {
+      activeNames.value.push(name)
+    }
   }else{
-    activeNames.value.push(name)
+    if(activeNames.value === name){
+      activeNames.value = ''
+    }else{
+      activeNames.value  = name
+    }
+    
   }
+
   emits('update:modelValue', activeNames.value)
+  
 }
 
 provide<CollapseContext>(CollapseContextKey, {

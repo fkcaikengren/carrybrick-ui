@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import CBPopover from '../../../packages/vue/src/components/popover/Popover.vue'
-  import CBButton from '../../../packages/vue/src/components/button/Button.vue'
-  import CBIcon from '../../../packages/vue/src/components/icon/Icon.vue'
+  // 更改
+  import {CBPopover,CBButton, CBIcon} from '@carrybrick/vue'
+  
   import { ref } from 'vue'
   const popoverRef = ref<typeof CBPopover | null>(null)
   const handleClose = ()=>{

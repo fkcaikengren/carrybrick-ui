@@ -1,7 +1,7 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" }, // 组件包部分
-    { "path": "./tsconfig.docs.json" }, // 组件包部分
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.docs.json" }
   ]
 }

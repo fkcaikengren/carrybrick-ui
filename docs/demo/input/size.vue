@@ -1,7 +1,6 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
-import CBInput from '../../../packages/vue/src/components/input/Input.vue'
-
+  import { ref } from 'vue';
+  import {CBInput} from '@carrybrick/vue'
   const text1 = ref('')
   const text2 = ref('')
   const text3 = ref('')
@@ -10,7 +9,6 @@ import CBInput from '../../../packages/vue/src/components/input/Input.vue'
 
 <template>
   <main>
-    <h3>尺寸</h3>
     <div class="row">
       <div class="col">
         <CBInput placeholder="请输入" v-model="text1"

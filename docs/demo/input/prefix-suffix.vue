@@ -1,7 +1,6 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
-  import CBInput from '../../../packages/vue/src/components/input/Input.vue'
-  import CBIcon from '../../../packages/vue/src/components/icon/Icon.vue'
+  import { ref } from 'vue';
+  import {CBInput, CBIcon} from '@carrybrick/vue'
   import { CirclePlus } from '@element-plus/icons-vue'
 
   const text1 = ref('')
@@ -20,7 +19,6 @@
 
 <template>
   <main>
-    <h5>前缀图标，后缀图标</h5>
     <div class="row">
       <div class="col">
         <CBInput placeholder="搜索1" v-model="text1" prefix-icon='Search' />
@@ -31,7 +29,6 @@
     </div>
 
 
-    <h5>前缀插槽、后缀插槽</h5>
     <div class="row">
       <div class="col">
         <CBInput placeholder="请输入" v-model="text3" >

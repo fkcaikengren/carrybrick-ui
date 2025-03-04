@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import {CBCollapse, CBCollapseItem} from '@carrybrick/vue'
-  const openValue = ref(['a'])
+  
+  const openValue = ref('a')
 
 </script>
 

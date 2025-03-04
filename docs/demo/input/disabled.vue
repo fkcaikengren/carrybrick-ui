@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { ref, watch } from 'vue';
-import CBInput from '../../../packages/vue/src/components/input/Input.vue'
-
+  import {CBInput} from '@carrybrick/vue'
   const search = ref('')
   
   watch(()=>search.value, ()=>{

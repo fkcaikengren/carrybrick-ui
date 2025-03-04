@@ -3,7 +3,7 @@ import type { ItemName } from './types'
 // 上下文
 
 export interface CollapseContext {
-  activeNames: Ref<ItemName[]>;
+  activeNames: Ref<ItemName[] | ItemName>;
   handleClick: (name: ItemName )=>void;
 }
 

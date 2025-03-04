@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CBButton from '../../../packages/vue/src/components/button/Button.vue'
+  import {CBButton} from '@carrybrick/vue'
 </script>
 
 <template>

@@ -47,5 +47,13 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
   },
+  vite: {
+    resolve: {
+      alias: {
+        '@carrybrick/vue': path.resolve(__dirname, '../../packages/vue/src/index.ts')
+      }
+    }
+  }
+
   
 })

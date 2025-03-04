@@ -2,7 +2,7 @@
   "private": true,
   "description": "搬砖专用组件库",
   "scripts": {
-
+    "build": "gulp --require @esbuild-kit/cjs-loader -f build/gulpfile.js",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
@@ -25,12 +25,15 @@
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/eslint-config-typescript": "^14.4.0",
     "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.20.1",
     "eslint-plugin-import": "^2.31.0",
     "typescript": "^5.7.3",
     "unplugin-auto-import": "^19.1.1",
     "unplugin-vue-define-options": "^1.5.5",
     "unplugin-vue-macros": "^2.14.4",
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.3",
     "vitepress": "^1.6.3",
     "vitepress-demo-plugin": "^1.2.3",
     "vitest": "^3.0.7",

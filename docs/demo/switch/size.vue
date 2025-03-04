@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
-  import CBSwitch from '../../../packages/vue/src/components/switch/Switch.vue'
-
+  import {CBSwitch} from '@carrybrick/vue'
   const state1 = ref(false)
   const state2 = ref('yes')
   const state3 = ref('yes')

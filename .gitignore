@@ -14,6 +14,7 @@ node_modules
 dist
 coverage
 packages/element-plus/version.ts
+/build/dist
 
 # local env files
 *.local
