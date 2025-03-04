@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 import { defineConfig, mergeConfig } from 'vite'
-import dts from 'vite-plugin-dts'
 
 import viteBaseConfig from './vite.base.config'
 
@@ -21,7 +20,6 @@ export default mergeConfig(
         // 全量的包，直接在浏览器中引用，除了vue, 其他依赖需要打包到产物中
         external: ['vue'],
         output: {
-          exports: 'named',
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: 'Vue',

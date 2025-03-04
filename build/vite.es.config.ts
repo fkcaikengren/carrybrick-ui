@@ -9,11 +9,12 @@ import viteBaseConfig from './vite.base.config'
 export default mergeConfig(
   viteBaseConfig,
   defineConfig({
-    // plugins: [
-    //   dts({
-    //     tsconfigPath: resolve(__dirname,  '../packages/vue/tsconfig.json')
-    //   })
-    // ],
+    plugins: [
+      // dts({
+      //   tsconfigPath: resolve(__dirname,  '../packages/vue/tsconfig.json'),
+      //   // rollupTypes: true 
+      // })
+    ],
     build: {
       outDir: 'dist/es',
       lib: {
@@ -31,9 +32,7 @@ export default mergeConfig(
           //让打包目录和我们目录对应
           preserveModules: true,
           preserveModulesRoot: resolve(__dirname,  '../packages/vue/src'),
-
-          //配置打包根目录
-          // dir: resolve(__dirname,  '../packages/vue')
+        
         },
       },
     }
