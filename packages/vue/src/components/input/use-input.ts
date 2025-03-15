@@ -26,7 +26,7 @@ export const usePassword = (props : InputProps)=>{
 
 
 
-export const useKls = (props: InputProps, inputType: Ref<InputType | undefined>, isFocused: Ref<boolean>)=>{
+export const useKls = (props: InputProps, inputType: Ref<InputType | undefined>, isFocused: Ref<boolean>, isError: Ref<boolean>)=>{
   const { b, e, m, is } = useNamespace('input')
 
   const rootKls = computed(()=>[
@@ -36,7 +36,7 @@ export const useKls = (props: InputProps, inputType: Ref<InputType | undefined>,
     is('disabled', props.disabled),
   ])
 
-  const wrapKls = computed(()=> [e('wrap'), is('focused', isFocused.value)])
+  const wrapKls = computed(()=> [e('wrap'), is('focused', isFocused.value), is('error', isError.value)])
   const innerKls = computed(()=> [e('inner')])
   const prefixKls = e('prefix')
   const suffixKls = e('suffix')

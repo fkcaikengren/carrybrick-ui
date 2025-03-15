@@ -3,6 +3,7 @@ import { vitepressDemoPlugin } from 'vitepress-demo-plugin';
 import path from 'path';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/carrybrick-docs/',
   title: "@carrybrick-ui",
   description: "方便搬砖的组件库",
   markdown: { 
@@ -37,7 +38,8 @@ export default defineConfig({
         items: [
           { text: 'Input', link: '/vue/input' },
           { text: 'Textarea', link: '/vue/textarea' },
-          { text: 'Switch', link: '/vue/switch' }
+          { text: 'Switch', link: '/vue/switch' },
+          { text: 'Form', link: '/vue/form' }
         ]
       }
       

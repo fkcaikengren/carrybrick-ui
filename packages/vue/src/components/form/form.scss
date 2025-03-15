@@ -1,0 +1,50 @@
+
+@use "../../styles/var.scss" as *;
+@use "../../styles/mixins/var" as *;
+@use "../../styles/mixins/mixins" as *;
+
+
+@include b(form) {
+  @include set-component-css-var(form, $form);
+  
+  display: flex;
+  flex-direction: column;
+  // align-items: stretch;
+}
+
+
+
+@include b(form-item) {
+  --font-size: inherit;
+
+  @include e(label-wrap){
+    font-size: var(--font-size);
+    width: 120px;
+    @include e(label){
+      width: auto;
+      display: inline-flex;
+
+      @include when(required) {
+        &::before{
+          content: '*';
+          color: getCssVar('color-error');
+          padding-right: 4px;
+          vertical-align: middle;
+        }
+      }
+    }
+    
+  }
+  @include e(content){
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    @include e(error){
+      font-size: 12px;
+      line-height: 1.1;
+      color: getCssVar('color-error');
+      padding-top: 2px;
+    }
+  }
+  
+}

@@ -36,12 +36,13 @@
 </template>
 <script lang="ts" setup>
 import './input.scss';
-import { ref} from 'vue'
+import {inject, ref} from 'vue'
 import CBIcon from '../icon/Icon.vue'
 import { CircleClose } from '@element-plus/icons-vue'
 import type {  InputProps, InputEmits } from './types'
 import { useKls, usePassword } from './use-input';
 import { useInputFocus } from '@carrybrick-ui/vue-hooks'
+import { formItemKey } from '../form/constant';
 
 
 defineOptions({
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<InputProps>(),{
 
 const emit = defineEmits<InputEmits>()
 
+const formItemContext = inject(formItemKey)
 
 const {
   inputType,
@@ -74,8 +76,9 @@ const {
   inputRef,
   focus,
   blur,
-  isFocused
-} = useInputFocus()
+  isFocused,
+  isError,
+} = useInputFocus(formItemContext)
 
 const {
   rootKls,
@@ -86,7 +89,7 @@ const {
   prefixIconKls,
   suffixIconKls,
   clearIconKls
-} = useKls(props, inputType, isFocused)
+} = useKls(props, inputType, isFocused, isError)
 
 const inputValue = ref(props.modelValue)
 const handleChange = (evt: Event)=>{

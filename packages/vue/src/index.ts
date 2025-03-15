@@ -1,13 +1,24 @@
 import CBIcon from "./components/icon";
 import CBButton from "./components/button";
-import CBCollapse from "./components/collapse";
-import {CollapseItem as CBCollapseItem} from "./components/collapse";
+import CBCollapse, {CollapseItem as CBCollapseItem} from "./components/collapse";
+
 import CBPopover from "./components/popover";
 import CBInput from "./components/input";
 import CBTextarea from "./components/textarea";
 import CBSwitch from "./components/switch";
+import CBForm, {FormItem as CBFormItem} from './components/form';
 
-export { CBIcon, CBButton, CBCollapse, CBCollapseItem, CBPopover, CBInput, CBTextarea, CBSwitch };
+// 导出组件相关的类型
+export type { FormRules, FormInstance } from './components/form/types';
+
+export { 
+  CBIcon, CBButton, CBCollapse, CBCollapseItem, CBPopover, CBInput, CBTextarea, CBSwitch,
+  CBForm,
+  CBFormItem
+};
+
+
+
 
 // // 组件库
 const components = [
@@ -19,6 +30,8 @@ const components = [
   CBInput,
   CBTextarea,
   CBSwitch,
+  CBForm,
+  CBFormItem
 ];
 // 是否已安装标识
 const INSTALLED_KEY = Symbol("INSTALLED_KEY");

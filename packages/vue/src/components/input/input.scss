@@ -47,6 +47,9 @@
     @include when(focused) {
       border-color: getCssVar('input-focus-border');
     }
+    @include when(error) {
+      border-color: getCssVar('color-error');
+    }
     
 
     @include e(prefix){

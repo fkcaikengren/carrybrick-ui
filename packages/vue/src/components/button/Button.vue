@@ -1,5 +1,5 @@
 <template>
-  <button :class="rootKls" v-bind="_props" >
+  <button :class="rootKls" @click="handleClick" v-bind="_props">
     <template v-if="loading">
       <CBIcon  :class="[loadingKls, iconKls]">
         <Loading />
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<ButtonProps>(),{
   round: false,
   disabled: false,
   loading: false,
-  
+  nativeType: 'button',
 })
 
 
@@ -53,11 +53,25 @@ const iconKls = e('icon')
 const textKls = e('text')
 
 const _props = computed(()=>{
-  if(props.disabled){
-    return {
-      disabled: true
-    }
+  const attr: Record<string, any> = {type: props.nativeType}
+  if(props.disabled || props.loading){
+    attr['disabled'] = true
   }
+  return attr;
 })
+
+
+const handleClick = (e: MouseEvent)=>{
+  if(props.disabled || props.loading){
+    e.stopPropagation()
+    return;
+  }
+
+  if(props.nativeType === 'reset'){
+    // form.reset()
+  }
+  
+  // emit('click', e)
+}
 
 </script>
