@@ -1,14 +1,17 @@
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
-  import {CBForm, CBFormItem, CBInput, CBButton } from '@carrybrick/vue'
+  import {CBForm, CBFormItem, CBInput, CBTextarea, CBButton } from '@carrybrick/vue'
   import type { FormRules, FormInstance } from '@carrybrick/vue'
   
   interface FormModel {
     name: string
+    email: string
     desc: string
+    
   }
   const model = ref<FormModel>({
     name: '',
+    email: '',
     desc: ''
   })
   const rules = reactive<FormRules<FormModel>>({
@@ -16,7 +19,13 @@
       {type:'string', required:true, message:'必填', trigger: 'blur'},
       {min: 3, max: 5, message:'长度在3到5之间', trigger: 'blur'}
     ],
-    desc: [{required:false, message:'no必填'}]
+    email: [
+      {type:'string', required:true, message:'必填'},
+      {min: 3, max: 5, message:'长度在3到5之间'}
+    ],
+    desc: [
+    {type:'string', required:true, message:'必填', trigger: 'blur'},
+    ]
   })
 
   const formEl = ref<FormInstance>()
@@ -37,12 +46,16 @@
       <CBFormItem label="姓名" prop="name">
         <CBInput v-model="model.name"></CBInput>
       </CBFormItem>
-      <CBFormItem label="描述" prop="desc">
-        <CBInput v-model="model.desc"></CBInput>
+      <CBFormItem label="邮箱" prop="email">
+        <CBInput v-model="model.email"></CBInput>
       </CBFormItem>
+      <CBFormItem label="描述" prop="desc">
+        <CBTextarea v-model="model.desc"></CBTextarea>
+      </CBFormItem>
+      
       <CBFormItem >
         <CBButton type="primary" @click="onSubmit">提交</CBButton>
-        <CBButton>取消</CBButton>
+        <CBButton native-type="reset">重置</CBButton>
       </CBFormItem>
     </CBForm>
 

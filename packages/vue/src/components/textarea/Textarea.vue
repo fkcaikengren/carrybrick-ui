@@ -14,12 +14,14 @@
 </template>
 <script lang="ts" setup>
 import './textarea.scss';
-import { ref, computed, shallowRef, watch} from 'vue'
-import { useInputFocus } from '@carrybrick-ui/vue-hooks'
-import { useNamespace } from '@carrybrick-ui/vue-hooks';
-import type {  TextareaProps, TextareaEmits, AutoSizeObject } from './types'
-import { calcTextareaHeight } from './utils';
-import { isObject } from '../../utils';
+import { ref, computed, watch, inject} from 'vue'
+import { useInputFocus } from '@carrybrick-ui/vue-hooks';
+import { useKls, useCalculation } from './use-textarea'
+import type { TextareaProps, TextareaEmits } from './types'
+import type { Ref } from 'vue'
+
+
+import { formItemContextKey } from '../form/constant';
 
 defineOptions({
   name: 'CBTextarea'
@@ -48,47 +50,33 @@ const realTextareaStyle = computed(()=>{
   }
 })
 
-
+const formItemContext = inject(formItemContextKey)
 
 const {
   wrapRef,
   inputRef: textareaRef,
   focus,
   blur,
-  isFocused
-} = useInputFocus()
-
-
-const calcTextareaStyle = shallowRef()
-
-const resizeTextarea = ()=>{
-  if(props.autosize){
-    if(isObject(props.autosize)) {
-      const autosize = props.autosize as AutoSizeObject
-      calcTextareaStyle.value = calcTextareaHeight(textareaRef.value as HTMLTextAreaElement, autosize.minRows, autosize.maxRows)
-    }else{
-      calcTextareaStyle.value = calcTextareaHeight(textareaRef.value as HTMLTextAreaElement, props.rows)
-    }
-  }
-}
-
-watch(()=>props.modelValue, ()=>{
-  resizeTextarea()
-})
-
-
-const { b, e, is } = useNamespace('textarea')
-const rootKls = computed(()=>[
-  b(), 
-  is('disabled', props.disabled),
-])
-const wrapKls = computed(()=> [e('wrap'), is('focused', isFocused.value)])
-const innerKls = computed(()=> [e('inner')])
+  isFocused,
+  isError
+} = useInputFocus(formItemContext)
 
 
 
+const calcTextareaStyle = useCalculation(props, textareaRef as Ref<HTMLTextAreaElement>)
 
+
+const {rootKls,
+    wrapKls,
+    innerKls
+} =  useKls(props, isFocused, isError )
+
+
+// 双向绑定
 const inputValue = ref(props.modelValue)
+watch(()=>props.modelValue, ()=>{
+  inputValue.value = props.modelValue
+})
 const handleChange = (evt: Event)=>{
   const { value } = evt.target as HTMLInputElement
   inputValue.value = value;

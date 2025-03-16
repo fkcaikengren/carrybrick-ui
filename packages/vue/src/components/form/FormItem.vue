@@ -16,10 +16,10 @@
 </template>
 <script setup lang="ts">
 import './form.scss';
-import {computed, inject, onMounted, provide, ref} from 'vue'
+import {computed, inject, onMounted, nextTick,  provide, ref} from 'vue'
 import { useNamespace } from '@carrybrick-ui/vue-hooks';
 import type {  FormItemContext, FormItemProps } from './types';
-import { formItemKey, formKey } from './constant';
+import { formItemContextKey, formContextKey } from './constant';
 import Schema from 'async-validator';
 import { isNil } from '../../utils';
 
@@ -34,8 +34,7 @@ const props = withDefaults(defineProps<FormItemProps>(), {
 })
 
 
-
-const formContext = inject(formKey)
+const formContext = inject(formContextKey)
 const errMsg = ref('')
 
 
@@ -69,6 +68,7 @@ const asyncValidate = async (trigger?:string)=>{
     }
     return validator.validate(data).then(()=>{
       errMsg.value = ''
+      setIsError(false)
       return null;
     }).catch(({errors, fields})=>{
       // 如果该字段验证失败,返回两个信息
@@ -76,18 +76,39 @@ const asyncValidate = async (trigger?:string)=>{
       // fields: Object, 每个字段的rule
       //  处理错误状态
       errMsg.value = fields[props.prop!][0].message
+      setIsError(true)
       return fields;
     })
 
   }
 }
 
+const isError = ref(false)
+const setIsError = (error:boolean)=>{
+    isError.value = error
+}
+const clearValidate = ()=>{
+  errMsg.value = ''
+  setIsError(false)
+}
 const formItemContext: FormItemContext|null = props.prop ? {
   prop: props.prop || '',
-  validate: asyncValidate
+  isError, 
+  setIsError,
+  validate: asyncValidate,
+  clearValidate,
+  resetField: ()=> {
+    if(formContext && props.prop){
+      formContext.model[props.prop!] = ''
+    }
+    nextTick(()=>{
+      clearValidate()
+    })
+    
+  },
 }: null
 
-provide(formItemKey, formItemContext)
+provide(formItemContextKey, formItemContext)
 onMounted(()=>{
   if(formContext && formItemContext){
     formContext.addField(formItemContext)

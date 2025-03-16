@@ -7,7 +7,7 @@
 import { provide, ref } from 'vue';
 import { useNamespace } from '@carrybrick-ui/vue-hooks';
 import { FormProps, FormItemContext} from './types';
-import { formKey } from './constant';
+import { formContextKey } from './constant';
 
 defineOptions({
   name: 'CBFormItem'
@@ -25,14 +25,20 @@ const rootKls = b()
 
 // props.rules
 const fields:FormItemContext[] = []
-provide(formKey, {
+const resetFields = ()=>{
+  fields.forEach(field=>{
+    field.resetField()
+  })
+}
+provide(formContextKey, {
   ...props,
   addField: (field: FormItemContext)=>{
     fields.push(field)
   },
   removeField: (field: FormItemContext)=>{
     fields.splice(fields.indexOf(field), 1)
-  }
+  },
+  resetFields
 })
 
 
@@ -59,8 +65,10 @@ const validate = ()=>{
 }
 
 
+
 defineExpose({
-  validate
+  validate,
+  resetFields
 })
 </script>
 

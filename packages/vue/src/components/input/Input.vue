@@ -36,13 +36,13 @@
 </template>
 <script lang="ts" setup>
 import './input.scss';
-import {inject, ref} from 'vue'
+import {inject, ref, watch} from 'vue'
 import CBIcon from '../icon/Icon.vue'
 import { CircleClose } from '@element-plus/icons-vue'
 import type {  InputProps, InputEmits } from './types'
 import { useKls, usePassword } from './use-input';
 import { useInputFocus } from '@carrybrick-ui/vue-hooks'
-import { formItemKey } from '../form/constant';
+import { formItemContextKey } from '../form/constant';
 
 
 defineOptions({
@@ -63,7 +63,7 @@ const props = withDefaults(defineProps<InputProps>(),{
 
 const emit = defineEmits<InputEmits>()
 
-const formItemContext = inject(formItemKey)
+const formItemContext = inject(formItemContextKey)
 
 const {
   inputType,
@@ -92,6 +92,9 @@ const {
 } = useKls(props, inputType, isFocused, isError)
 
 const inputValue = ref(props.modelValue)
+watch(()=>props.modelValue, ()=>{
+  inputValue.value = props.modelValue
+})
 const handleChange = (evt: Event)=>{
   // console.log(evt);
   const { value } = evt.target as HTMLInputElement
@@ -103,7 +106,6 @@ const handleClearInput = (evt: Event)=>{
   inputValue.value = ''
   emit('update:modelValue', inputValue.value)
 }
-
 
 
 defineExpose({

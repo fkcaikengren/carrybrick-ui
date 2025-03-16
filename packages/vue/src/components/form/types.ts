@@ -1,4 +1,4 @@
-
+import type {Ref} from 'vue';
 export type LabelPosition = 'left' | 'right' | 'top';
 export declare type RuleType = 'string' | 'number' | 'boolean' | 'method' | 'regexp' | 'integer' | 'float' | 'array' | 'object' | 'enum' | 'date' | 'url' | 'hex' | 'email' | 'pattern' | 'any';
 export interface FormRule {
@@ -30,6 +30,7 @@ export interface FormProps {
 export interface FormContext extends FormProps{
   addField: (field: FormItemContext) => void;
   removeField: (field: FormItemContext) => void;
+  resetFields: () => void;
 }
 
 
@@ -52,7 +53,11 @@ export interface FormItemProps{
 
 export interface FormItemContext {
   prop: string;
+  isError: Ref<boolean>;
+  setIsError: (err:boolean) => void;
   validate: (trigger?:string)=> Promise<Record<string, any>>;
+  clearValidate: () => void;
+  resetField: () => void;
 }
 
 

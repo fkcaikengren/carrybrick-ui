@@ -21,6 +21,7 @@ import { Loading } from '@element-plus/icons-vue'
 
 import { useNamespace } from '@carrybrick-ui/vue-hooks';
 import type {  ButtonProps } from './types'
+import { useFormItem } from '../form/use-form-item';
 
 
 const props = withDefaults(defineProps<ButtonProps>(),{
@@ -33,7 +34,7 @@ const props = withDefaults(defineProps<ButtonProps>(),{
   nativeType: 'button',
 })
 
-
+const { form } = useFormItem()
 const { b, e, m, is } = useNamespace('button')
 
 const rootKls = computed(()=>[
@@ -68,7 +69,8 @@ const handleClick = (e: MouseEvent)=>{
   }
 
   if(props.nativeType === 'reset'){
-    // form.reset()
+    console.log('重置');
+    form?.resetFields()
   }
   
   // emit('click', e)

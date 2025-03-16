@@ -16,8 +16,8 @@
 
 @include b(form-item) {
   --font-size: inherit;
-
-  @include e(label-wrap){
+  margin-bottom: 16px;
+  @include e(label-wrap){ 
     font-size: var(--font-size);
     width: 120px;
     @include e(label){
@@ -36,10 +36,15 @@
     
   }
   @include e(content){
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
+    box-sizing: border-box;
     @include e(error){
+      position: absolute;
+      left: 0;
+      top: 100%;
       font-size: 12px;
       line-height: 1.1;
       color: getCssVar('color-error');
